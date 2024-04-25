@@ -1,3 +1,14 @@
-import { SetMetadata } from '@nestjs/common';
+import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 
-export const GetIp = (...args: string[]) => SetMetadata('get-ip', args);
+export const GetIp = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext): string => {
+    const request = ctx.switchToHttp().getRequest();
+
+    const clientIp =
+      request.headers['x-forwarded-for'] ||
+      request.connection.remoteAddress ||
+      request.ip;
+
+    return clientIp;
+  },
+);

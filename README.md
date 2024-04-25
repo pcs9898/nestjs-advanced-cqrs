@@ -14,6 +14,12 @@ unit test, e2e test
 
 applying cqrs for all module
 
+## Initial Settings
+
+- [x] db entity, migration, index, seed
+- [x] common
+- [] app.module.ts, main.ts settings
+
 ## Auth Module
 
 - [] feature1/signup
