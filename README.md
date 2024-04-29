@@ -18,7 +18,7 @@ applying cqrs for all module
 
 - [x] db entity, migration, index, seed
 - [x] common
-- [] app.module.ts, main.ts settings
+- [x] app.module.ts, main.ts settings
 
 ## Auth Module
 
