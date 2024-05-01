@@ -1,6 +1,6 @@
 # nestjs-advanced-cqrs completion
 
-crud, upload, download
+crud, upload, download, api versioning
 
 db postgres, redis, migration, seed, index
 
@@ -22,20 +22,20 @@ applying cqrs for all module
 
 ## Auth Module
 
-- [] feature1/signup
-- [] feature2/signin
-- [] feature3/verifyEmail
-- [] feature4/resendAuthCode
-- [] feature5/restoreRefreshToken
-- [] feature6/signout
-- [] feature7/resendAuthCode
+- [] api1/signupV1
+- [] api2/signinV1
+- [] api3/verifyEmailV1
+- [] api4/resendAuthCodeV1
+- [] api5/restoreRefreshTokenV1
+- [] api6/signoutV1
+- [] api7/resendAuthCodeV1
 - [] cqrs
 - [] testCode
 
 ## Health Module
 
-- [] feature8/signup
-- [] testCode
+- [x] api8/checkV1
+- [x] testCode
 
 ## Mail Module
 
@@ -50,21 +50,21 @@ applying cqrs for all module
 
 ## User Module
 
-- [] feature10/findAll
-- [] feature11/findOne
+- [] api10/findAllV1
+- [] api11/findOneV1
 - [] cqrs
 - [] testCode
 
 ## Video Module
 
-- [] feature12/upload
-- [] feature13/findAll
-- [] feature14/findOne
-- [] feature15/download
+- [] api12/uploadV1
+- [] api13/findAllV1
+- [] api14/findOneV1
+- [] api15/downloadV1
 - [] cqrs
 - [] testCode
 
 ## Analytics Module
 
-- [] feature16/findTop5Download
+- [] api16/findTop5DownloadV1
 - [] testCode
