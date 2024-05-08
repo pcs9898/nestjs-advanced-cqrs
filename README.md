@@ -22,26 +22,25 @@ applying cqrs for all module
 
 ## Auth Module
 
-- [] api1/signupV1
-- [] api2/signinV1
-- [] api3/verifyEmailV1
-- [] api4/resendAuthCodeV1
-- [] api5/restoreRefreshTokenV1
-- [] api6/signoutV1
-- [] api7/resendAuthCodeV1
+- [x] api1-signup/v1
+- [] api2-signin/v1
+- [] api3-verifyEmail/v1
+- [] api4-resendAuthCode/v1
+- [] api5-restoreAccessToken/v1
+- [] api6-signout/v1
 - [] cqrs
 - [] testCode
 
 ## Health Module
 
-- [x] api8/checkV1
+- [x] api8-check/v1
 - [x] testCode
 
 ## Mail Module
 
-- [] MailService-sendUserServiceAuthCode
-- [] MailService-sendAnalyticsServiceFindTop5downloadVideos
-- [] testCode
+- [x] MailService-sendAuthCode
+- [x] MailService-sendFindTop5downloadVideos
+- [x] testCode
 
 ## Schedule-batch Module
 
@@ -50,21 +49,21 @@ applying cqrs for all module
 
 ## User Module
 
-- [] api10/findAllV1
-- [] api11/findOneV1
+- [] api10-findAll/v1
+- [] api11-findOne/v1
 - [] cqrs
 - [] testCode
 
 ## Video Module
 
-- [] api12/uploadV1
-- [] api13/findAllV1
-- [] api14/findOneV1
-- [] api15/downloadV1
+- [] api12-upload/v1
+- [] api13-findAll/v1
+- [] api14-findOne/v1
+- [] api15-download/v1
 - [] cqrs
 - [] testCode
 
 ## Analytics Module
 
-- [] api16/findTop5DownloadV1
+- [] api16-findTop5Download/v1
 - [] testCode

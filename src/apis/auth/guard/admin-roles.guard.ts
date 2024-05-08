@@ -1,11 +1,13 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { UserService } from 'src/apis/user/user.service';
 
 @Injectable()
 export class AdminRolesGuard implements CanActivate {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    return true;
+  constructor(private userService: UserService) {}
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const http = context.switchToHttp();
+    const request = http.getRequest();
+
+    return await this.userService.IsUserAdmin({ user_id: request.user.id });
   }
 }

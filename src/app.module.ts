@@ -55,7 +55,7 @@ import { AnalyticsModule } from './apis/analytics/analytics.module';
 
         if (configService.get('NODE_ENV') === 'development') {
           console.info('Sync Typeorm');
-          obj = Object.assign(obj, { synchronize: true, logging: true });
+          obj = Object.assign(obj, { synchronize: false, logging: true });
         }
         return obj;
       },
