@@ -10,13 +10,13 @@ export class SignupResDto {
 
 export class SigninResDto {
   @ApiProperty({})
-  accessToken: string;
+  accessToken?: string;
 
   @ApiProperty({})
-  refreshToken: string;
+  refreshToken?: string;
 
   @ApiProperty({})
-  unVerifiedToken: string;
+  unVerifiedToken?: string;
 }
 
 export class RestoreAccessTokenResDto {
@@ -27,7 +27,7 @@ export class RestoreAccessTokenResDto {
   refreshToken: string;
 }
 
-export class VerifyEmailAuthCodeResDto {
+export class VerifyAuthCodeResDto {
   @ApiProperty({ required: true })
   accessToken: string;
 

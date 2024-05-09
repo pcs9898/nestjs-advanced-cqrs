@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty, Matches, MinLength } from 'class-validator';
+import { IsNotEmpty, Matches, MinLength } from 'class-validator';
 
 export class SignupReqDto {
   @ApiProperty({ required: true, example: 'aa@a.com' })
@@ -28,10 +28,9 @@ export class SigninReqDto {
   password: string;
 }
 
-export class VerifyEmailAuthCodeReqDto {
+export class VerifyAuthCodeReqDto {
   @ApiProperty({ required: true, example: '000000' })
   @IsNotEmpty()
-  @IsInt()
-  @Matches(/^\d{6}$/) // check is it 6 digit number
-  authCode: number;
+  @Matches(/^\d{6}$/, { message: 'Auth code must be a 6 digit number' }) // check is it 6 digit number
+  authCode: string;
 }

@@ -24,6 +24,7 @@ import { ScheduledBatchModule } from './apis/scheduled-batch/scheduled-batch.mod
 import { UserModule } from './apis/user/user.module';
 import { VideoModule } from './apis/video/video.module';
 import { AnalyticsModule } from './apis/analytics/analytics.module';
+import { JwtAccessGuard } from './apis/auth/guard/jwt-access.guard';
 
 @Module({
   imports: [
@@ -70,7 +71,7 @@ import { AnalyticsModule } from './apis/analytics/analytics.module';
             host: configService.get('redis.host'),
             port: configService.get('redis.port'),
             password: configService.get('redis.password'),
-            db: configService.get('redis.number'),
+            db: configService.get('redis.dbNumber'),
           },
         };
 
@@ -97,6 +98,10 @@ import { AnalyticsModule } from './apis/analytics/analytics.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAccessGuard,
     },
   ],
 })

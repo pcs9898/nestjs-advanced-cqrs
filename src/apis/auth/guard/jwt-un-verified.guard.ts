@@ -34,7 +34,7 @@ export class JwtUnVerifiedGuard extends AuthGuard('unVerified') {
 
     const decoded = this.jwtService.decode(unVerifiedToken);
 
-    if (decoded['tokenType'] !== 'unVerifiedToken') {
+    if (!decoded || decoded['tokenType'] !== 'unVerifiedToken') {
       const error = new UnauthorizedException('UnVerifiedToken is required');
       this.logger.error(error.message, error.stack);
       throw error;

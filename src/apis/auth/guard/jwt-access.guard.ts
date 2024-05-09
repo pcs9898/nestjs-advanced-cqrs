@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IS_PUBLIC_KEY } from 'src/common/decorator/public.decorator';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
+import { JwtUnVerifiedGuardAllowPath } from '../constants/auth.constants';
 
 @Injectable()
 export class JwtAccessGuard extends AuthGuard('access') {
@@ -26,9 +27,7 @@ export class JwtAccessGuard extends AuthGuard('access') {
     const request: Request = http.getRequest();
 
     if (
-      request.path.includes('/auth/restoreAccessToken') ||
-      request.path.includes('/auth/verifyEmail') ||
-      request.path.includes('/auth/resendAuthCode')
+      JwtUnVerifiedGuardAllowPath.some((path) => request.path.includes(path))
     ) {
       return true;
     }

@@ -1,6 +1,10 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { IJwtPayload } from 'src/common/types/global-types';
 import { UserService } from 'src/apis/user/user.service';
@@ -23,10 +27,14 @@ export class JwtUnVerifiedStrategy extends PassportStrategy(
 
   async validate(payload: IJwtPayload) {
     const id = payload.sub;
-    const user = this.userService.findOneById({ id });
+    const user = await this.userService.findOneById({ id });
 
     if (!user) {
       throw new NotFoundException('User not exist');
+    }
+
+    if (user.isVerified) {
+      throw new UnauthorizedException('User already verified');
     }
 
     return { id };

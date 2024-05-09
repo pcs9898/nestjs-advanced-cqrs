@@ -23,11 +23,11 @@ applying cqrs for all module
 ## Auth Module
 
 - [x] api1-signup/v1
-- [] api2-signin/v1
-- [] api3-verifyEmail/v1
-- [] api4-resendAuthCode/v1
-- [] api5-restoreAccessToken/v1
-- [] api6-signout/v1
+- [x] api2-verifyAuthCode/v1
+- [x] api3-resendAuthCode/v1
+- [x] api4-signin/v1
+- [x] api5-restoreAccessToken/v1
+- [x] api6-signout/v1
 - [] cqrs
 - [] testCode
 

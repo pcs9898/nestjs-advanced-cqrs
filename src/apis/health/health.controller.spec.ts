@@ -9,30 +9,7 @@ import {
 
 describe('HealthController', () => {
   let healthController: HealthController;
-  // let healthCheckService: HealthCheckService;
-  // let db: TypeOrmHealthIndicator;
-  // let memory: MemoryHealthIndicator;
-
-  const checkResponse: HealthCheckResult = {
-    status: 'ok',
-    info: {
-      database: {
-        status: 'up',
-      },
-      memory_heap: {
-        status: 'up',
-      },
-    },
-    error: {},
-    details: {
-      database: {
-        status: 'up',
-      },
-      memory_heap: {
-        status: 'up',
-      },
-    },
-  };
+  let healthCheckService: HealthCheckService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -40,39 +17,48 @@ describe('HealthController', () => {
       providers: [
         {
           provide: HealthCheckService,
-          useValue: { check: jest.fn().mockResolvedValue(checkResponse) },
+          useValue: { check: jest.fn() },
         },
-        {
-          provide: TypeOrmHealthIndicator,
-          useValue: { pingCheck: jest.fn() },
-        },
-        {
-          provide: MemoryHealthIndicator,
-          useValue: { checkHeap: jest.fn() },
-        },
+        TypeOrmHealthIndicator,
+        MemoryHealthIndicator,
       ],
     }).compile();
 
     healthController = module.get<HealthController>(HealthController);
-    // healthCheckService = module.get<HealthCheckService>(HealthCheckService);
-    // db = module.get<TypeOrmHealthIndicator>(TypeOrmHealthIndicator);
-    // memory = module.get<MemoryHealthIndicator>(MemoryHealthIndicator);
+    healthCheckService = module.get<HealthCheckService>(HealthCheckService);
   });
 
   it('should be defined', () => {
     expect(healthController).toBeDefined();
   });
 
-  describe('check v1', () => {
+  describe('checkV1', () => {
     it('should return health check result', async () => {
       // give
-      const result = checkResponse;
+      const checkResDto: HealthCheckResult = {
+        status: 'ok',
+        info: {
+          database: {
+            status: 'up',
+          },
+          memory_heap: {
+            status: 'up',
+          },
+        },
+        error: {},
+        details: {
+          database: {
+            status: 'up',
+          },
+          memory_heap: {
+            status: 'up',
+          },
+        },
+      };
+      jest.spyOn(healthCheckService, 'check').mockResolvedValue(checkResDto);
 
-      // when
-      const response = await healthController.checkV1();
-
-      // then
-      expect(response).toEqual(result);
+      // when, then
+      expect(await healthController.checkV1()).toEqual(checkResDto);
     });
   });
 });

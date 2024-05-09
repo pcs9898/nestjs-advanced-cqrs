@@ -34,7 +34,7 @@ export class JwtRefreshGuard extends AuthGuard('refresh') {
 
     const decoded = this.jwtService.decode(refreshToken);
 
-    if (decoded['tokenType'] !== 'refreshToken') {
+    if (!decoded || decoded['tokenType'] !== 'refreshToken') {
       const error = new UnauthorizedException('RefreshToken is required');
       this.logger.error(error.message, error.stack);
       throw error;
