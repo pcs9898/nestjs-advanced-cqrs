@@ -20,20 +20,20 @@ applying cqrs for all module
 - [x] common
 - [x] app.module.ts, main.ts settings
 
-## Auth Module
-
-- [x] api1-signup/v1
-- [x] api2-verifyAuthCode/v1
-- [x] api3-resendAuthCode/v1
-- [x] api4-signin/v1
-- [x] api5-restoreAccessToken/v1
-- [x] api6-signout/v1
-- [] cqrs
-- [] testCode
-
 ## Health Module
 
-- [x] api8-check/v1
+- [x] api1-check/v1
+- [x] testCode
+
+## Auth Module
+
+- [x] api2-signup/v1
+- [x] api3-verifyAuthCode/v1
+- [x] api4-resendAuthCode/v1
+- [x] api5-signin/v1
+- [x] api6-restoreAccessToken/v1
+- [x] api7-signout/v1
+- [] cqrs
 - [x] testCode
 
 ## Mail Module
@@ -42,28 +42,28 @@ applying cqrs for all module
 - [x] MailService-sendFindTop5downloadVideos
 - [x] testCode
 
+## User Module
+
+- [x] api8-findAll/v1
+- [x] api9-findOne/v1
+- [] cqrs
+- [x] testCode
+
 ## Schedule-batch Module
 
 - [] ScheduledBatchService-unVerifiedUserOver30DaysCleanUp
 - [] testCode
 
-## User Module
-
-- [] api10-findAll/v1
-- [] api11-findOne/v1
-- [] cqrs
-- [] testCode
-
 ## Video Module
 
-- [] api12-upload/v1
-- [] api13-findAll/v1
-- [] api14-findOne/v1
-- [] api15-download/v1
+- [] api10-upload/v1
+- [] api11-findAll/v1
+- [] api12-findOne/v1
+- [] api13-download/v1
 - [] cqrs
 - [] testCode
 
 ## Analytics Module
 
-- [] api16-findTop5Download/v1
+- [] api14-findTop5Download/v1
 - [] testCode

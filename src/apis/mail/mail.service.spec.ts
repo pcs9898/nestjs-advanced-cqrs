@@ -1,31 +1,55 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MailService } from './mail.service';
-import { MailerService } from '@nestjs-modules/mailer';
+import { MAILER_OPTIONS, MailerService } from '@nestjs-modules/mailer';
 import { ConfigService } from '@nestjs/config';
-import { UserRole } from '../../common/enum/global-enum';
+import { createTransport } from 'nodemailer';
+import { UserRole } from 'src/common/enum/global-enum';
 
 describe('MailService', () => {
   let mailService: MailService;
-  let mockMailerService: any;
-  let mockConfigService: any;
+  let mailerService: MailerService;
 
   beforeEach(async () => {
-    mockMailerService = {
-      sendMail: jest.fn(),
-    };
-
-    mockConfigService = {
-      get: jest.fn(),
-    };
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         MailService,
-        { provide: MailerService, useValue: mockMailerService },
-        { provide: ConfigService, useValue: mockConfigService },
+        {
+          provide: MailerService,
+          useValue: {
+            sendMail: jest.fn().mockResolvedValue({}),
+          },
+        },
+        {
+          provide: MAILER_OPTIONS,
+          useValue: {
+            transport: createTransport({
+              host: 'smtp.example.com',
+              port: 587,
+              secure: false,
+              auth: {
+                user: 'admin',
+              },
+            }),
+          },
+        },
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn().mockImplementation((key: string) => {
+              switch (key) {
+                case 'mail.senderEmail':
+                  return 'sender@example.com';
+                default:
+                  return null;
+              }
+            }),
+          },
+        },
       ],
     }).compile();
 
     mailService = module.get<MailService>(MailService);
+    mailerService = module.get<MailerService>(MailerService);
   });
 
   it('should be defined', () => {
@@ -37,18 +61,21 @@ describe('MailService', () => {
     const authCode = 123456;
     const email = 'email@example.com';
     const username = email.split('@')[0];
-    mockMailerService.sendMail.mockResolvedValue(true);
-    mockConfigService.get.mockReturnValue('sender@example.com');
+    const senderEmail = 'sender@example.com';
 
-    // when
-    await mailService.sendAuthCode({ authCode, email });
+    jest
+      .spyOn(mailerService, 'sendMail')
+      .mockImplementation(() => Promise.resolve());
 
-    // then
-    expect(mockMailerService.sendMail).toHaveBeenCalledWith({
+    // when, then
+    expect(
+      mailService.sendAuthCode({ authCode, email }),
+    ).resolves.not.toThrow();
+    expect(mailerService.sendMail).toHaveBeenCalledWith({
       to: email,
-      from: 'sender@example.com',
-      subject: `Hello ${username}`,
+      from: senderEmail,
       html: expect.any(String),
+      subject: `Hello ${username}`,
     });
   });
 
@@ -92,23 +119,27 @@ describe('MailService', () => {
         },
       },
     ];
-    mockMailerService.sendMail.mockResolvedValue(true);
-    mockConfigService.get.mockReturnValue('sender@example.com');
+    const receiverEmail = 'sender@example.com';
+    const senderEmail = 'nesttube@nesttube.com';
 
-    // when
-    await mailService.sendFindTop5downloadVideos(testVideos);
+    jest
+      .spyOn(mailerService, 'sendMail')
+      .mockImplementation(() => Promise.resolve());
 
-    //then
-    expect(mockMailerService.sendMail).toHaveBeenCalledWith({
-      to: 'sender@example.com',
-      from: 'nesttube@nesttube.com',
+    // when, then
+    expect(
+      mailService.sendFindTop5downloadVideos(testVideos),
+    ).resolves.not.toThrow();
+    expect(mailerService.sendMail).toHaveBeenCalledWith({
+      to: receiverEmail,
+      from: senderEmail,
       subject: 'Top 5 downloaded Videos by Nest Tube',
       html: expect.any(String),
     });
 
     // Check that the email body contains the titles of the videos
     for (const video of testVideos) {
-      expect(mockMailerService.sendMail).toHaveBeenCalledWith(
+      expect(mailerService.sendMail).toHaveBeenCalledWith(
         expect.objectContaining({
           html: expect.stringContaining(video.title),
         }),
