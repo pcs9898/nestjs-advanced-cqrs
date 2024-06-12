@@ -51,8 +51,8 @@ applying cqrs for all module
 
 ## Schedule-batch Module
 
-- [] ScheduledBatchService-unVerifiedUserOver30DaysCleanUp
-- [] testCode
+- [x] ScheduledBatchService-unVerifiedUserOver30DaysCleanUp
+- [x] testCode
 
 ## Video Module
 

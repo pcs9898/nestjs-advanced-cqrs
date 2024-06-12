@@ -39,4 +39,18 @@ export class UserService {
 
     return user.role === UserRole.Admin;
   }
+
+  async removeUnVerifiedUserOver30Days() {
+    const thirtyDays = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const usersShouldRemove = await this.userRepository
+      .createQueryBuilder()
+      .select()
+      .where('is_verified=:is_verified', { is_verified: false })
+      .andWhere('created_at<:thirtyDays', { thirtyDays })
+      .getMany();
+
+    for (const user of usersShouldRemove) {
+      await this.userRepository.remove(user);
+    }
+  }
 }
