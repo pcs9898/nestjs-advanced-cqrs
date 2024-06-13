@@ -4,11 +4,11 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class ScheduledBatchService {
-    constructor(private readonly userService:UserService){}
+  constructor(private readonly userService: UserService) {}
 
-    @Cron(CronExpression.EVERY_HOUR)
-    async removeUnVerifiedUserOver30Days(){
-        Logger.log("removeUnVerifiedUserOver30Days called");
-        await this.userService.removeUnVerifiedUserOver30Days();
-    }
+  @Cron(CronExpression.EVERY_HOUR)
+  async removeUnVerifiedUserOver30Days() {
+    Logger.log('removeUnVerifiedUserOver30Days called');
+    await this.userService.removeUnVerifiedUserOver30Days();
+  }
 }

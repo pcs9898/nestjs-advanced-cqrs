@@ -56,12 +56,12 @@ applying cqrs for all module
 
 ## Video Module
 
-- [] api10-upload/v1
-- [] api11-findAll/v1
-- [] api12-findOne/v1
-- [] api13-download/v1
+- [x] api10-upload/v1
+- [x] api11-findAll/v1
+- [x] api12-findOne/v1
+- [x] api13-download/v1
 - [] cqrs
-- [] testCode
+- [x] testCode
 
 ## Analytics Module
 
