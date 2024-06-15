@@ -33,7 +33,7 @@ applying cqrs for all module
 - [x] api5-signin/v1
 - [x] api6-restoreAccessToken/v1
 - [x] api7-signout/v1
-- [] cqrs
+- [] cqrs (api2,3,4,5,6,7) with api v2
 - [x] testCode
 
 ## Mail Module
@@ -46,7 +46,7 @@ applying cqrs for all module
 
 - [x] api8-findAll/v1
 - [x] api9-findOne/v1
-- [] cqrs
+- [] cqrs (api8,9) with api v2
 - [x] testCode
 
 ## Schedule-batch Module
@@ -60,10 +60,10 @@ applying cqrs for all module
 - [x] api11-findAll/v1
 - [x] api12-findOne/v1
 - [x] api13-download/v1
-- [] cqrs
+- [] cqrs (api10,11,12,13) with api v2
 - [x] testCode
 
 ## Analytics Module
 
-- [x] api14-findTop5DownloadVideos/v1
+- [x] AnalyticsService-findTop5DownloadVideos
 - [x] testCode
