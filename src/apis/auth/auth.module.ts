@@ -8,9 +8,17 @@ import { MailModule } from '../mail/mail.module';
 import { JwtAccessStrategy } from './strategy/jwt-access.strategy';
 import { JwtRefreshStrategy } from './strategy/jwt-refresh.strategy';
 import { JwtUnVerifiedStrategy } from './strategy/jwt-unVerified.strategy';
+import { SignUpHandler } from './command/sign-up.handler';
+import { CqrsModule } from '@nestjs/cqrs';
+import { VerifyAuthCodeHandler } from './command/verify-authCode.handler';
+import { SignInHandler } from './command/sign-in.handler';
+import { ResendAuthCodeHandler } from './command/resend-authCode.handler';
+import { RestoreAccessTokenHandler } from './command/Restore-AccessToken.handler';
+import { SignOutHandler } from './command/sign-out.handler';
+import { SignOutEventHandler } from './event/sign-out-event.handler';
 
 @Module({
-  imports: [UserModule, PassportModule, JwtModule, MailModule],
+  imports: [UserModule, PassportModule, JwtModule, MailModule, CqrsModule],
   controllers: [AuthController],
   providers: [
     AuthService,
@@ -18,6 +26,13 @@ import { JwtUnVerifiedStrategy } from './strategy/jwt-unVerified.strategy';
     JwtRefreshStrategy,
     JwtUnVerifiedStrategy,
     Logger,
+    SignUpHandler,
+    VerifyAuthCodeHandler,
+    SignInHandler,
+    ResendAuthCodeHandler,
+    RestoreAccessTokenHandler,
+    SignOutHandler,
+    SignOutEventHandler,
   ],
 })
 export class AuthModule {}

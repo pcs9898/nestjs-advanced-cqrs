@@ -30,7 +30,7 @@ import {
 import * as crypto from 'crypto';
 import {
   IAuthServiceRestoreAccessToken,
-  IAuthServiceSaveAuthCodeOnRedis,
+  TAuthServiceSaveAuthCodeOnRedis,
   IAuthServiceSaveHashedRefreshTokenOnRedis,
   IAuthServiceVerifyEmailAuthCode,
 } from './interface/auth-service.interface';
@@ -107,8 +107,10 @@ export class AuthService {
 
   async verifyAuthCode({
     userId,
-    authCode,
+    authCode: stringAuthCode,
   }: IAuthServiceVerifyEmailAuthCode): Promise<VerifyAuthCodeResDto> {
+    const authCode = Number(stringAuthCode);
+
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -299,7 +301,7 @@ export class AuthService {
     userId,
     authCode,
     ttl,
-  }: IAuthServiceSaveAuthCodeOnRedis) {
+  }: TAuthServiceSaveAuthCodeOnRedis) {
     await this.redis.set(`auth_code:${userId}`, authCode, 'EX', ttl);
   }
 

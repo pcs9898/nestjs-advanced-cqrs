@@ -1,12 +1,15 @@
 export interface IAuthServiceVerifyEmailAuthCode {
   userId: string;
-  authCode: number;
+  authCode: string;
 }
 
-export interface IAuthServiceSaveAuthCodeOnRedis
-  extends IAuthServiceVerifyEmailAuthCode {
+export type TAuthServiceSaveAuthCodeOnRedis = Pick<
+  IAuthServiceVerifyEmailAuthCode,
+  'userId'
+> & {
+  authCode: number;
   ttl: number;
-}
+};
 
 export interface IAuthServiceSaveHashedRefreshTokenOnRedis {
   userId: string;

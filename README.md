@@ -33,7 +33,7 @@ applying cqrs for all module
 - [x] api5-signin/v1
 - [x] api6-restoreAccessToken/v1
 - [x] api7-signout/v1
-- [] cqrs (api2,3,4,5,6,7) with api v2
+- [x] cqrs (api2,3,4,5,6,7) with api v2
 - [x] testCode
 
 ## Mail Module

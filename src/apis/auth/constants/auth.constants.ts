@@ -5,4 +5,7 @@ export const JwtUnVerifiedGuardAllowPath = [
   '/auth/verifyAuthCode/v1',
   '/auth/resendAuthCode/v1',
   '/auth/restoreAccessToken/v1',
+  '/auth/verifyAuthCode/v2',
+  '/auth/resendAuthCode/v2',
+  '/auth/restoreAccessToken/v2',
 ];
