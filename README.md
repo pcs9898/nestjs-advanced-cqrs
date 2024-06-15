@@ -46,7 +46,7 @@ applying cqrs for all module
 
 - [x] api8-findAll/v1
 - [x] api9-findOne/v1
-- [] cqrs (api8,9) with api v2
+- [x] cqrs (api8,9) with api v2
 - [x] testCode
 
 ## Schedule-batch Module
