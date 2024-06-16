@@ -60,7 +60,7 @@ applying cqrs for all module
 - [x] api11-findAll/v1
 - [x] api12-findOne/v1
 - [x] api13-download/v1
-- [] cqrs (api10,11,12,13) with api v2
+- [x] cqrs (api10,11,12,13) with api v2
 - [x] testCode
 
 ## Analytics Module
