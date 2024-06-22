@@ -42,13 +42,12 @@ export class VideoService {
     await queryRunner.startTransaction();
 
     try {
-      const foundVideo = await this.videoRepository.findOne({
+      const foundVideo = await queryRunner.manager.findOne(Video, {
         where: { title },
       });
-
       if (foundVideo) throw new ConflictException('Title already exists');
 
-      const video = await this.videoRepository.save(
+      const video = await queryRunner.manager.save(
         this.videoRepository.create({ title, mimetype, user: { id: user.id } }),
       );
 
